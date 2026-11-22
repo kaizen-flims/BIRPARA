@@ -14,6 +14,7 @@ export class VegetationSystem {
   public readonly root: TransformNode;
 
   private readonly scene: Scene;
+  private readonly assets: AssetManager;
   private readonly lighting: LightingSystem;
   private readonly collision: CollisionSystem;
   private readonly treeTrunkProto: Mesh;
@@ -29,6 +30,7 @@ export class VegetationSystem {
     collision: CollisionSystem
   ) {
     this.scene = scene;
+    this.assets = assets;
     this.lighting = lighting;
     this.collision = collision;
     this.root = new TransformNode('vegetationRoot', scene);
@@ -121,7 +123,12 @@ export class VegetationSystem {
   }
 
   public placeStreamChannel(points: Vector3[], width: number): void {
-    const waterMat = this.assetsOrSceneWaterMat();
+    const waterMat = this.assets.getOrCreatePBRMaterial(
+      'dooarsStreamWaterMat',
+      new Color3(0.18, 0.34, 0.42),
+      0.18,
+      0.05
+    );
     for (let i = 0; i < points.length - 1; i++) {
       const a = points[i];
       const b = points[i + 1];
@@ -140,16 +147,5 @@ export class VegetationSystem {
       strip.material = waterMat;
       strip.receiveShadows = true;
     }
-  }
-
-  private assetsOrSceneWaterMat() {
-    const existing = this.scene.getMaterialByName('dooarsStreamWaterMat');
-    if (existing) return existing;
-    const mat = this.treeCrownProto.material!.clone('dooarsStreamWaterMat');
-    if (mat && 'albedoColor' in mat) {
-      (mat as { albedoColor: Color3; roughness: number }).albedoColor = new Color3(0.18, 0.34, 0.42);
-      (mat as { albedoColor: Color3; roughness: number }).roughness = 0.18;
-    }
-    return mat;
   }
 }
