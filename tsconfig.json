@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "@world/*": ["src/world/*"],
+      "@terrain/*": ["src/terrain/*"],
+      "@roads/*": ["src/roads/*"],
+      "@buildings/*": ["src/buildings/*"],
+      "@districts/*": ["src/districts/*"],
+      "@vegetation/*": ["src/vegetation/*"],
+      "@player/*": ["src/player/*"],
+      "@camera/*": ["src/camera/*"],
+      "@physics/*": ["src/physics/*"],
+      "@controls/*": ["src/controls/*"],
+      "@ui/*": ["src/ui/*"],
+      "@systems/*": ["src/systems/*"]
+    }
+  },
+  "include": ["src"]
+}
